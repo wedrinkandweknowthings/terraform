@@ -29,7 +29,7 @@ resource "aws_subnet" "private" {
   count = "${ length( var.azs ) }"
 
   availability_zone = "${ element( var.azs, count.index ) }"
-  cidr_block = "${ cidrsubnet(var.cidr, 4, count.index + 4) }"
+  cidr_block = "${ cidrsubnet(var.cidr, 4, count.index + length(var.azs)) }"
   vpc_id = "${ module.vpc.id }"
 
   map_public_ip_on_launch = "false"
